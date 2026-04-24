@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantis Tech — Software for Financial Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:   #FFFFFF;
+  --off:     #F7F8FC;
+  --off2:    #EEF0F8;
+  --ink:     #111827;
+  --ink2:    #374151;
+  --muted:   #6B7280;
+  --border:  #E5E7EB;
+  --blue:    #2563EB;
+  --blue2:   #3B82F6;
+  --blue-lt: #EFF6FF;
+  --teal:    #0D9488;
+  --teal-lt: #F0FDFA;
+  --amber:   #D97706;
+  --amber-lt:#FFFBEB;
+  --violet:  #7C3AED;
+  --vlt:     #F5F3FF;
+  --green:   #059669;
+  --green-lt:#ECFDF5;
+  --pill-r:  999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;line-height:1.6;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;}
+.logo-sq{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:white;}
+.logo-wordmark{font-size:1.05rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+.logo-wordmark span{color:var(--blue);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-link-plain{font-size:.875rem;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s;}
+.nav-link-plain:hover{color:var(--ink);}
+.btn-nav{background:var(--ink);color:white;border:none;padding:.55rem 1.2rem;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-nav:hover{background:var(--blue);transform:translateY(-1px);}
+
+/* HERO */
+.hero{padding:6rem 5% 4rem;text-align:center;position:relative;overflow:hidden;}
+.hero-blob1{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.08),transparent 70%);top:-200px;left:-150px;pointer-events:none;}
+.hero-blob2{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.07),transparent 70%);top:-100px;right:-100px;pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-lt);color:var(--blue);border:1px solid rgba(37,99,235,.2);padding:.35rem 1rem;border-radius:var(--pill-r);font-size:.78rem;font-weight:600;letter-spacing:.02em;margin-bottom:2rem;}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:400;line-height:1.1;color:var(--ink);max-width:820px;margin:0 auto 1.5rem;letter-spacing:-.03em;}
+.hero h1 em{font-style:italic;color:var(--blue);}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:560px;margin:0 auto 2.5rem;line-height:1.75;font-weight:400;}
+.hero-actions{display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap;}
+.btn-primary{background:var(--blue);color:white;border:none;padding:.8rem 1.8rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;box-shadow:0 4px 14px rgba(37,99,235,.3);}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.35);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--border);padding:.78rem 1.6rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-outline:hover{border-color:var(--ink);background:var(--off);}
+
+/* BROWSER MOCKUP */
+.hero-visual{margin:4rem auto 0;max-width:900px;position:relative;}
+.browser-frame{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.04),0 20px 60px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);}
+.browser-bar{background:var(--off);border-bottom:1px solid var(--border);padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;}
+.browser-dots{display:flex;gap:.4rem;}
+.browser-dot{width:10px;height:10px;border-radius:50%;}
+.dot-red{background:#FF5F56;}.dot-yellow{background:#FFBD2E;}.dot-green{background:#27C93F;}
+.browser-url{flex:1;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.3rem .75rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);max-width:320px;margin:0 auto;}
+.dashboard-body{padding:1.5rem;background:var(--off);display:grid;grid-template-columns:200px 1fr;gap:1rem;min-height:300px;}
+.dash-sidebar{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.dash-nav-item{display:flex;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:6px;font-size:.75rem;font-weight:500;color:var(--muted);margin-bottom:.2rem;cursor:default;}
+.dash-nav-item.active{background:var(--blue-lt);color:var(--blue);}
+.dash-nav-item span{font-size:.9rem;}
+.dash-main{display:flex;flex-direction:column;gap:1rem;}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;}
+.kpi-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;}
+.kpi-label{font-size:.68rem;color:var(--muted);font-weight:500;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em;}
+.kpi-val{font-size:1.3rem;font-weight:700;color:var(--ink);font-family:'Fraunces',serif;}
+.kpi-badge{display:inline-block;font-size:.65rem;padding:.15rem .45rem;border-radius:4px;margin-top:.25rem;font-weight:600;}
+.up{background:var(--green-lt);color:var(--green);}.warn{background:var(--amber-lt);color:var(--amber);}
+.dash-chart-row{display:grid;grid-template-columns:1.6fr 1fr;gap:.75rem;}
+.chart-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem;}
+.chart-title{font-size:.72rem;font-weight:600;color:var(--ink);margin-bottom:.75rem;}
+.sparkline{display:flex;align-items:flex-end;gap:3px;height:50px;}
+.spark-bar{flex:1;border-radius:3px 3px 0 0;background:var(--blue-lt);min-width:8px;}
+.spark-bar.hi{background:var(--blue);}
+.ai-badge{display:inline-flex;align-items:center;gap:.3rem;background:var(--vlt);color:var(--violet);border:1px solid rgba(124,58,237,.15);padding:.25rem .6rem;border-radius:6px;font-size:.65rem;font-weight:600;margin-top:.5rem;}
+.table-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.table-row{display:grid;grid-template-columns:1fr 80px 80px;padding:.55rem 1rem;font-size:.72rem;border-bottom:1px solid var(--border);align-items:center;}
+.table-row:last-child{border-bottom:none;}
+.table-row.header{background:var(--off);font-weight:600;color:var(--muted);text-transform:uppercase;font-size:.65rem;letter-spacing:.04em;}
+.green-text{color:var(--green);font-weight:600;}
+.muted-text{color:var(--muted);}
+
+/* TRUST BAR */
+.trust-bar{padding:2.5rem 5%;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;background:var(--white);}
+.trust-label{font-size:.75rem;color:var(--muted);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;}
+.trust-items{display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;}
+.trust-item{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:.4rem;}
+
+/* SECTIONS */
+section{padding:6rem 5%;}
+.section-chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;color:var(--ink);margin-bottom:1rem;}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:520px;}
+
+/* PRODUCTS */
+.products-section{background:var(--off);}
+.products-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;flex-wrap:wrap;}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.product-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:2rem;transition:all .25s;cursor:default;position:relative;overflow:hidden;}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.product-card:hover{border-color:transparent;box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-4px);}
+.product-card:hover::before{transform:scaleX(1);}
+.card-blue::before{background:linear-gradient(90deg,var(--blue),var(--violet));}
+.card-teal::before{background:linear-gradient(90deg,var(--teal),var(--blue));}
+.card-amber::before{background:linear-gradient(90deg,var(--amber),#f97316);}
+.card-violet::before{background:linear-gradient(90deg,var(--violet),var(--blue2));}
+.card-green::before{background:linear-gradient(90deg,var(--green),var(--teal));}
+.product-icon-wrap{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem;}
+.icon-blue{background:var(--blue-lt);}.icon-teal{background:var(--teal-lt);}.icon-amber{background:var(--amber-lt);}.icon-violet{background:var(--vlt);}.icon-green{background:var(--green-lt);}
+.product-card h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;}
+.product-card p{font-size:.875rem;color:var(--muted);line-height:1.75;margin-bottom:1.2rem;}
+.product-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.tag{font-size:.7rem;font-weight:600;padding:.25rem .65rem;border-radius:var(--pill-r);background:var(--off2);color:var(--ink2);letter-spacing:.02em;}
+.cta-card{background:linear-gradient(135deg,var(--ink) 0%,#1e3a8a 100%);border:none;color:white;}
+.cta-card h3{color:white;}.cta-card p{color:rgba(255,255,255,.65);}
+
+/* AI */
+.ai-section{background:var(--white);}
+.ai-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.ai-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0;}
+.ai-pill{display:flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:var(--pill-r);border:1.5px solid var(--border);font-size:.82rem;font-weight:500;background:var(--white);color:var(--ink2);transition:all .2s;}
+.ai-pill:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt);}
+.ai-visual{background:var(--off);border:1.5px solid var(--border);border-radius:20px;padding:2rem;position:relative;}
+.ai-code-block{background:var(--ink);border-radius:12px;padding:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;margin-bottom:1rem;}
+.c-comment{color:#6B7280;}.c-key{color:#93C5FD;}.c-val{color:#86EFAC;}.c-str{color:#FCD34D;}.c-fn{color:#C4B5FD;}
+.ai-output{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem;display:flex;align-items:center;gap:.75rem;}
+.ai-out-icon{width:36px;height:36px;border-radius:8px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.ai-out-text{font-size:.8rem;}
+.ai-out-text strong{color:var(--green);display:block;font-size:.75rem;}
+
+/* PROCESS */
+.process-section{background:var(--off);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;}
+.process-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:1.8rem;position:relative;}
+.process-num{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:300;color:var(--off2);line-height:1;margin-bottom:.75rem;display:block;}
+.process-card h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem;}
+.process-card p{font-size:.82rem;color:var(--muted);line-height:1.7;}
+.process-connector{position:absolute;top:2.8rem;right:-1rem;color:var(--border);font-size:1.2rem;z-index:1;}
+
+/* ABOUT */
+.about-section{background:var(--white);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.entity-panel{background:var(--off);border:1.5px solid var(--border);border-radius:20px;padding:2rem;}
+.entity-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.entity-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:white;}
+.entity-name{font-weight:700;font-size:1.05rem;}
+.entity-tagline{font-size:.78rem;color:var(--muted);}
+.entity-field{display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.82rem;}
+.entity-field:last-child{border-bottom:none;}
+.ef-label{color:var(--muted);font-weight:500;}
+.ef-val{font-weight:600;color:var(--ink);text-align:right;}
+.ef-val.mono{font-family:'JetBrains Mono',monospace;font-size:.72rem;}
+.msme-badge{display:flex;align-items:center;gap:.4rem;justify-content:flex-end;}
+.msme-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+
+/* CONTACT */
+.contact-section{background:var(--ink);color:white;text-align:center;padding:7rem 5%;}
+.contact-section .section-chip{color:rgba(255,255,255,.5);}
+.contact-section .section-title{color:white;}
+.contact-section .section-title em{color:#93C5FD;font-style:italic;}
+.contact-section .section-sub{color:rgba(255,255,255,.55);margin:0 auto 2.5rem;text-align:center;}
+.contact-cards{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
+.contact-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.2rem 1.8rem;text-align:left;}
+.contact-card-label{font-size:.68rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;}
+.contact-card-val{font-size:.88rem;color:white;font-weight:500;}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-brand{font-family:'Fraunces',serif;font-size:1rem;color:rgba(255,255,255,.8);margin-bottom:.2rem;}
+.footer-left{font-size:.8rem;color:rgba(255,255,255,.35);}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.25);text-align:right;}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero-content>*{animation:fadeUp .6s ease both;}
+.hero-content>*:nth-child(1){animation-delay:.1s;}
+.hero-content>*:nth-child(2){animation-delay:.2s;}
+.hero-content>*:nth-child(3){animation-delay:.3s;}
+.hero-content>*:nth-child(4){animation-delay:.4s;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--off);}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-sq">Q</div>
+    <span class="logo-wordmark">Quantis<span>Tech</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#ai">AI</a></li>
+    <li><a href="#process">How we work</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="nav-link-plain">Contact</a>
+    <a href="#contact" class="btn-nav">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>AI-Powered Software · Now Available</div>
+    <h1>Software that makes<br><em>financial complexity</em><br>feel simple</h1>
+    <p class="hero-sub">We build bespoke dashboards, tools, and AI-integrated software for traders, wealth managers, and businesses — fast, clean, and built to last.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">See what we build</a>
+      <a href="#contact" class="btn-outline">Talk to us →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="browser-frame">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot dot-red"></div>
+          <div class="browser-dot dot-yellow"></div>
+          <div class="browser-dot dot-green"></div>
+        </div>
+        <div class="browser-url">app.quantistech.in/dashboard</div>
+      </div>
+      <div class="dashboard-body">
+        <div class="dash-sidebar">
+          <div style="font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem">Navigation</div>
+          <div class="dash-nav-item active"><span>📊</span> Overview</div>
+          <div class="dash-nav-item"><span>📈</span> Positions</div>
+          <div class="dash-nav-item"><span>💼</span> Portfolio</div>
+          <div class="dash-nav-item"><span>🤖</span> AI Signals</div>
+          <div class="dash-nav-item"><span>📋</span> Reports</div>
+          <div class="dash-nav-item"><span>⚙️</span> Settings</div>
+        </div>
+        <div class="dash-main">
+          <div class="dash-kpis">
+            <div class="kpi-card"><div class="kpi-label">Today's P&L</div><div class="kpi-val">+₹48K</div><span class="kpi-badge up">↑ 2.4%</span></div>
+            <div class="kpi-card"><div class="kpi-label">Net Worth</div><div class="kpi-val">₹1.8Cr</div><span class="kpi-badge up">On track</span></div>
+            <div class="kpi-card"><div class="kpi-label">Open Positions</div><div class="kpi-val">4</div><span class="kpi-badge up">Algo live</span></div>
+            <div class="kpi-card"><div class="kpi-label">Cash Runway</div><div class="kpi-val">4.2mo</div><span class="kpi-badge warn">Review</span></div>
+          </div>
+          <div class="dash-chart-row">
+            <div class="chart-card">
+              <div class="chart-title">MTM Performance</div>
+              <div class="sparkline">
+                <div class="spark-bar" style="height:30%"></div><div class="spark-bar" style="height:45%"></div>
+                <div class="spark-bar" style="height:35%"></div><div class="spark-bar" style="height:55%"></div>
+                <div class="spark-bar" style="height:60%"></div><div class="spark-bar hi" style="height:70%"></div>
+                <div class="spark-bar hi" style="height:65%"></div><div class="spark-bar hi" style="height:80%"></div>
+                <div class="spark-bar hi" style="height:75%"></div><div class="spark-bar hi" style="height:90%"></div>
+                <div class="spark-bar hi" style="height:100%"></div>
+              </div>
+              <div class="ai-badge">🤖 AI signal active</div>
+            </div>
+            <div class="table-card">
+              <div class="table-row header"><span>Asset</span><span>Value</span><span>Change</span></div>
+              <div class="table-row"><span>Equity</span><span>₹82L</span><span class="green-text">+1.2%</span></div>
+              <div class="table-row"><span>MF</span><span>₹56L</span><span class="green-text">+0.8%</span></div>
+              <div class="table-row"><span>Gold</span><span>₹28L</span><span class="muted-text">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar reveal">
+  <div class="trust-label">Built with</div>
+  <div class="trust-items">
+    <div class="trust-item">🐍 Python</div>
+    <div class="trust-item">☁️ AWS Cloud</div>
+    <div class="trust-item">🤖 OpenAI / Claude AI</div>
+    <div class="trust-item">📊 Streamlit</div>
+    <div class="trust-item">🔗 Kite Connect API</div>
+    <div class="trust-item">🗄️ PostgreSQL / SQLite</div>
+    <div class="trust-item">📱 Telegram Bots</div>
+  </div>
+</div>
+
+<section class="products-section" id="products">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-chip">What we build</div>
+      <h2 class="section-title">A tool for every<br>financial use case</h2>
+    </div>
+    <p class="section-sub">Every product is built to spec — your logic, your data, your users. No templates, no off-the-shelf compromises.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card card-blue reveal">
+      <div class="product-icon-wrap icon-blue">📈</div>
+      <h3>Trading Dashboards</h3>
+      <p>Live MTM tracking, algo control panels, position monitoring, and kill-switch interfaces for F&O and equity traders. Built for speed under market pressure.</p>
+      <div class="product-tags"><span class="tag">0-DTE Algos</span><span class="tag">Live MTM</span><span class="tag">Kill Switch</span><span class="tag">Kite Connect</span></div>
+    </div>
+    <div class="product-card card-teal reveal">
+      <div class="product-icon-wrap icon-teal">💼</div>
+      <h3>Wealth Management Dashboards</h3>
+      <p>Multi-asset portfolio trackers for HNI clients — equity, MF, FD, real estate, gold — with goal tracking, net worth evolution, and advisor-client views.</p>
+      <div class="product-tags"><span class="tag">Multi-Asset</span><span class="tag">Goal Tracking</span><span class="tag">MFD Tools</span><span class="tag">HNI Reports</span></div>
+    </div>
+    <div class="product-card card-amber reveal">
+      <div class="product-icon-wrap icon-amber">🧮</div>
+      <h3>Personal CFO Dashboards</h3>
+      <p>Your own financial command centre — income, expenses, investments, EMIs, and net worth — updated live with AI-driven scenario modelling and tax projections.</p>
+      <div class="product-tags"><span class="tag">Cashflow</span><span class="tag">Tax Projection</span><span class="tag">AI Scenarios</span><span class="tag">Net Worth</span></div>
+    </div>
+    <div class="product-card card-violet reveal">
+      <div class="product-icon-wrap icon-violet">🔬</div>
+      <h3>Quantitative Analysis Tools</h3>
+      <p>Backtesting engines, options analytics, strategy screeners, and research platforms for quantitative traders. Cloud-hosted, fast, and built for real-world use.</p>
+      <div class="product-tags"><span class="tag">Backtesting</span><span class="tag">Options Greeks</span><span class="tag">IV Analysis</span><span class="tag">Screeners</span></div>
+    </div>
+    <div class="product-card card-green reveal">
+      <div class="product-icon-wrap icon-green">🏭</div>
+      <h3>SME Operations Dashboards</h3>
+      <p>Business intelligence for small and mid-size enterprises — sales pipelines, collections, payroll, and cash flow with AI-powered alerts and forecasting.</p>
+      <div class="product-tags"><span class="tag">Sales CRM</span><span class="tag">Cash Flow</span><span class="tag">AI Alerts</span><span class="tag">Collections</span></div>
+    </div>
+    <div class="product-card cta-card reveal" style="display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:2rem;margin-bottom:1rem">✦</div>
+      <h3>Have a custom requirement?</h3>
+      <p style="margin-bottom:1.5rem">We scope, design, and build to your exact specification.</p>
+      <a href="#contact" class="btn-primary" style="text-align:center">Start a conversation</a>
+    </div>
+  </div>
+</section>
+
+<section class="ai-section" id="ai">
+  <div class="ai-layout">
+    <div class="reveal">
+      <div class="section-chip">AI Integration</div>
+      <h2 class="section-title">We don't bolt AI on.<br>We build it in.</h2>
+      <p class="section-sub">AI is the decision layer in everything we build — driving insights, automation, and optimisation from day one. Not a feature. The foundation.</p>
+      <div class="ai-pills">
+        <div class="ai-pill">🧠 Signal Generation</div>
+        <div class="ai-pill">📊 Predictive Analytics</div>
+        <div class="ai-pill">⚡ Process Automation</div>
+        <div class="ai-pill">🔔 Smart Alerts</div>
+        <div class="ai-pill">🔗 API Integration</div>
+        <div class="ai-pill">🗣️ NL Reports</div>
+        <div class="ai-pill">📈 Scenario Modelling</div>
+        <div class="ai-pill">🛡️ Anomaly Detection</div>
+      </div>
+      <p class="section-sub">From trading bots that respond to volatility in real time, to SME dashboards that flag cash-flow risks before they happen — AI makes your software proactive, not reactive.</p>
+    </div>
+    <div class="ai-visual reveal">
+      <div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem">AI Engine · Sample</div>
+      <div class="ai-code-block">
+        <div><span class="c-comment"># AI signal engine</span></div>
+        <div><span class="c-fn">def</span> <span class="c-key">generate_signal</span>(market_data):</div>
+        <div>&nbsp;&nbsp;<span class="c-key">iv_rank</span> = <span class="c-fn">calc_iv_rank</span>(market_data)</div>
+        <div>&nbsp;&nbsp;<span class="c-key">vix</span> = market_data[<span class="c-str">'vix'</span>]</div>
+        <div>&nbsp;&nbsp;<span class="c-key">trend</span> = <span class="c-fn">ai_trend_model</span>(market_data)</div>
+        <div>&nbsp;&nbsp;</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">if</span> iv_rank &gt; <span class="c-val">60</span> <span class="c-fn">and</span> vix &lt; <span class="c-val">15</span>:</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">return</span> <span class="c-str">"SELL_STRANGLE"</span></div>
+        <div>&nbsp;&nbsp;<span class="c-fn">return</span> <span class="c-str">"WAIT"</span></div>
+      </div>
+      <div class="ai-output">
+        <div class="ai-out-icon">✅</div>
+        <div class="ai-out-text">
+          <strong>AI Output · 09:31:42</strong>
+          Signal: SELL_STRANGLE · IV Rank 68 · VIX 13.4 · Trend Neutral
+        </div>
+      </div>
+      <div style="margin-top:1rem;padding:1rem;background:var(--white);border:1px solid var(--border);border-radius:10px;font-size:.8rem;color:var(--muted)">
+        🤖 <strong style="color:var(--ink)">Works for your business too</strong> — inventory forecasting, collections alerts, payroll scheduling. If your business has data, we can make it smarter.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section" id="process">
+  <div style="text-align:center" class="reveal">
+    <div class="section-chip">How we work</div>
+    <h2 class="section-title">From brief to live<br>in weeks, not months</h2>
+  </div>
+  <div class="process-grid reveal">
+    <div class="process-card">
+      <span class="process-num">01</span>
+      <h4>Discovery</h4>
+      <p>We map your business logic, data sources, and user needs before writing a single line of code.</p>
+      <span class="process-connector">→</span>
+    </div>
+    <div class="process-card">
+      <span class="process-num">02</span>
+      <h4>Design & Scope</h4>
+      <p>A clear feature spec and timeline. You approve before we build — no surprises, no scope creep.</p>
+      <span class="process-connector">→</span>
+    </div>
+    <div class="process-card">
+      <span class="process-num">03</span>
+      <h4>Build & Iterate</h4>
+      <p>Live demos at every milestone. You see the product take shape in real time and can course-correct.</p>
+      <span class="process-connector">→</span>
+    </div>
+    <div class="process-card">
+      <span class="process-num">04</span>
+      <h4>Deploy & Maintain</h4>
+      <p>Cloud deployment, user onboarding, and ongoing maintenance under a fixed monthly retainer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-chip">About us</div>
+      <h2 class="section-title">Built by someone who<br>actually uses this stuff.</h2>
+      <p class="section-sub" style="margin-bottom:1.5rem">Quantis Tech is a Delhi-based software services firm specialising in financial technology. Founded by a quantitative trader and technologist with over 12 years of Indian markets experience — we build tools we'd use ourselves.</p>
+      <p class="section-sub" style="margin-bottom:1.5rem">We serve algorithmic traders, wealth advisors, MFDs, HNI families, and SMEs. Every product is fast, reliable, and genuinely intelligent.</p>
+      <p class="section-sub">We're lean — which means you work directly with the person who writes the code. No account managers, no handoffs, no fluff.</p>
+    </div>
+    <div class="reveal">
+      <div class="entity-panel">
+        <div class="entity-header">
+          <div class="entity-logo">Q</div>
+          <div>
+            <div class="entity-name">Quantis Tech</div>
+            <div class="entity-tagline">MSME Registered Software Services</div>
+          </div>
+        </div>
+        <div class="entity-field"><span class="ef-label">Proprietor</span><span class="ef-val">Vikram Batra</span></div>
+        <div class="entity-field"><span class="ef-label">Enterprise Type</span><span class="ef-val">Micro Enterprise · Services</span></div>
+        <div class="entity-field"><span class="ef-label">NIC Code</span><span class="ef-val">62099 — IT Services</span></div>
+        <div class="entity-field"><span class="ef-label">Registered</span><span class="ef-val">January 2026</span></div>
+        <div class="entity-field"><span class="ef-label">Location</span><span class="ef-val">North Delhi – 110033</span></div>
+        <div class="entity-field"><span class="ef-label">Status</span><span class="ef-val"><div class="msme-badge"><div class="msme-dot"></div>Active · 2025–26</div></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="reveal">
+    <div class="section-chip">Get in touch</div>
+    <h2 class="section-title">Got a problem to solve?<br><em>Let's talk.</em></h2>
+    <p class="section-sub">Tell us what you're trying to build. We'll scope it, price it honestly, and ship it.</p>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+      <a href="mailto:vikrambatra23@gmail.com" class="btn-primary">vikrambatra23@gmail.com</a>
+      <a href="tel:+919971338755" class="btn-outline" style="color:white;border-color:rgba(255,255,255,.2)">+91 99713 38755</a>
+    </div>
+    <div class="contact-cards">
+      <div class="contact-card"><div class="contact-card-label">Location</div><div class="contact-card-val">North Delhi, Delhi</div></div>
+      <div class="contact-card"><div class="contact-card-label">Business</div><div class="contact-card-val">Quantis Tech</div></div>
+      </div>
+      <div class="contact-card"><div class="contact-card-label">Response time</div><div class="contact-card-val">Within 24 hours</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-brand">QuantisTech</div>
+    <div class="footer-left">© 2026 Quantis Tech · Vikram Batra, Proprietor</div>
+  </div>
+  <div class="footer-right">North Delhi · 110033</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*60);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
